@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Website</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #3E2723; /* Dark Brown */
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+        #passwordInput {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #3E2723;
+            outline: none;
+            font-size: 18px;
+            padding: 5px;
+            width: 200px;
+            color: #3E2723;
+        }
+        #passwordInput::placeholder {
+            color: #3E2723;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        #cursor {
+            width: 2px;
+            height: 20px;
+            background-color: #3E2723;
+            margin-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+        #content {
+            display: none;
+            text-align: center;
+        }
+        #nameList {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        #nameList li {
+            margin: 10px 0;
+        }
+        #nameList a {
+            color: #3E2723;
+            text-decoration: none;
+        }
+        #nameList a:hover {
+            text-decoration: underline;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #3E2723;
+            color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5D4037;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <div id="cursor"></div>
+        <input type="password" id="passwordInput" placeholder="Password" autofocus>
+    </div>
+    <div id="content">
+        <h2>Dialect Members</h2>
+        <br></br>
+        <br></br>
+        <ul id="nameList">
+            <li><a href="https://x.com/jduyan" target="_blank">Josh Duyan</a></li>
+            <li><a href="https://x.com/brettbivens" target="_blank">Brett Bivens</a></li>
+            <li><a href="https://x.com/JonathanFJasper" target="_blank">Jonathan Jasper</a></li>
+        </ul>
+       
+    </div>
+
+    <script>
+        const correctPassword = "Hegel";
+        const passwordInput = document.getElementById("passwordInput");
+        const content = document.getElementById("content");
+        const cursor = document.getElementById("cursor");
+        const inputContainer = document.querySelector(".input-container");
+
+        passwordInput.addEventListener("input", function() {
+            if (this.value === correctPassword) {
+                inputContainer.remove(); // Remove the entire input container
+                content.style.display = "block";
+            }
+        });
+
+        // Hide cursor when input is focused
+        passwordInput.addEventListener("focus", function() {
+            cursor.style.display = "none";
+        });
+
+        // Show cursor when input is not focused
+        passwordInput.addEventListener("blur", function() {
+            cursor.style.display = "block";
+        });
+    </script>
+</body>
+</html>
