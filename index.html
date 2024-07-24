@@ -8,12 +8,29 @@
         body, html {
             height: 100%;
             margin: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #433E3C; /* Dark Brown */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        #video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #3E2723; /* Dark Brown */
+            height: 100vh;
+            /* Removed background-color */
         }
         .input-container {
             display: flex;
@@ -22,15 +39,15 @@
         #passwordInput {
             background: transparent;
             border: none;
-            border-bottom: 2px solid #3E2723;
+            border-bottom: 2px solid #433E3C;
             outline: none;
             font-size: 18px;
             padding: 5px;
             width: 200px;
-            color: #3E2723;
+            color: #433E3C;
         }
         #passwordInput::placeholder {
-            color: #3E2723;
+            color: #433E3C;
         }
         @keyframes blink {
             0% { opacity: 1; }
@@ -40,13 +57,16 @@
         #cursor {
             width: 2px;
             height: 20px;
-            background-color: #3E2723;
+            background-color: #433E3C;
             margin-right: 5px;
             animation: blink 0.7s infinite;
         }
         #content {
             display: none;
             text-align: center;
+            /* Removed background-color */
+            padding: 20px;
+            border-radius: 10px;
         }
         #nameList {
             list-style-type: none;
@@ -57,7 +77,7 @@
             margin: 10px 0;
         }
         #nameList a {
-            color: #3E2723;
+            color: #433E3C;
             text-decoration: none;
         }
         #nameList a:hover {
@@ -74,8 +94,8 @@
         }
         .button {
             padding: 10px 20px;
-            background-color: #3E2723;
-            color: #f0f0f0;
+            background-color: #433E3C;
+            color: #FFFFFF; /* Changed to white for better visibility */
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -88,40 +108,42 @@
     </style>
 </head>
 <body>
-    <div class="input-container">
-        <div id="cursor"></div>
-        <input type="password" id="passwordInput" placeholder="Password" autofocus>
+    <video id="video-background" autoplay loop muted playsinline>
+        <source src="Dialect Homescreen compressed.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content-wrapper">
+        <div class="input-container">
+            <div id="cursor"></div>
+            <input type="password" id="passwordInput" placeholder="Password" autofocus>
+        </div>
+        <div id="content">
+            <h2>Dialect Members</h2>
+            <br></br>
+            <br></br>
+            <ul id="nameList">
+                <li><a href="https://x.com/jduyan" target="_blank">Josh Duyan</a></li>
+                <li><a href="https://x.com/brettbivens" target="_blank">Brett Bivens</a></li>
+                <li><a href="https://x.com/JonathanFJasper" target="_blank">Jonathan Jasper</a></li>
+            </ul>
+        </div>
     </div>
-    <div id="content">
-        <h2>Dialect Members</h2>
-        <br></br>
-        <ul id="nameList">
-            <li><a href="https://x.com/jduyan" target="_blank">Josh Duyan</a></li>
-            <li><a href="https://x.com/brettbivens" target="_blank">Brett Bivens</a></li>
-            <li><a href="https://x.com/JonathanFJasper" target="_blank">Jonathan Jasper</a></li>
-        </ul>
-       
-    </div>
-
     <script>
         const correctPassword = "Hegel";
         const passwordInput = document.getElementById("passwordInput");
         const content = document.getElementById("content");
         const cursor = document.getElementById("cursor");
         const inputContainer = document.querySelector(".input-container");
-
         passwordInput.addEventListener("input", function() {
             if (this.value === correctPassword) {
                 inputContainer.remove(); // Remove the entire input container
                 content.style.display = "block";
             }
         });
-
         // Hide cursor when input is focused
         passwordInput.addEventListener("focus", function() {
             cursor.style.display = "none";
         });
-
         // Show cursor when input is not focused
         passwordInput.addEventListener("blur", function() {
             cursor.style.display = "block";
