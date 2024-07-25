@@ -9,8 +9,8 @@
             height: 100%;
             margin: 0;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: #433E3C; /* Dark Brown */
-            overflow: hidden; /* Prevent scrollbars */
+            color: #433E3C;
+            overflow: hidden;
         }
         #video-background {
             position: fixed;
@@ -91,11 +91,11 @@
             margin-top: 20px;
         }
         .button {
-            padding: 10px 25px;
+            padding: 10px 20px;
             background-color: #433E3C;
             color: #FFFFFF;
             border: none;
-            border-radius: 50px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             transition: all 0.3s ease;
@@ -104,36 +104,32 @@
             overflow: hidden;
             z-index: 1;
         }
-        .button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: all 0.4s;
-            z-index: -1;
-        }
-        .button:hover::before {
-            left: 100%;
+        @keyframes colorDisperse {
+            0% {
+                background-size: 100% 100%;
+            }
+            100% {
+                background-size: 200% 200%;
+            }
         }
         .button::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, #C741FF, #9B00E8);
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, #C741FF 0%, transparent 50%),
+                        radial-gradient(circle, #9B00E8 25%, transparent 75%);
+            transform: translate(-50%, -50%);
             opacity: 0;
             transition: opacity 0.3s ease;
-            z-index: -2;
-            border-radius: 50px;
+            z-index: -1;
+            animation: colorDisperse 4s ease infinite alternate;
         }
         .button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(199, 65, 255, 0.5);
+            box-shadow: 0 0 15px rgba(199, 65, 255, 0.3);
         }
         .button:hover::after {
             opacity: 1;
@@ -173,15 +169,13 @@
         const inputContainer = document.querySelector(".input-container");
         passwordInput.addEventListener("input", function() {
             if (this.value === correctPassword) {
-                inputContainer.remove(); // Remove the entire input container
+                inputContainer.remove();
                 content.style.display = "block";
             }
         });
-        // Hide cursor when input is focused
         passwordInput.addEventListener("focus", function() {
             cursor.style.display = "none";
         });
-        // Show cursor when input is not focused
         passwordInput.addEventListener("blur", function() {
             cursor.style.display = "block";
         });
