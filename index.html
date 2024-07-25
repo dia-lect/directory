@@ -30,7 +30,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* Removed background-color */
         }
         .input-container {
             display: flex;
@@ -64,7 +63,6 @@
         #content {
             display: none;
             text-align: center;
-            /* Removed background-color */
             padding: 20px;
             border-radius: 10px;
         }
@@ -95,12 +93,13 @@
         .button {
             padding: 10px 20px;
             background-color: #433E3C;
-            color: #FFFFFF; /* Changed to white for better visibility */
+            color: #FFFFFF;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            text-decoration: none;
         }
         .button:hover {
             background-color: #5D4037;
@@ -120,12 +119,16 @@
         <div id="content">
             <h2>Dialect Members</h2>
             <br></br>
-            <br></br>
             <ul id="nameList">
                 <li><a href="https://x.com/brettbivens" target="_blank">Brett Bivens</a></li>
                 <li><a href="https://x.com/jduyan" target="_blank">Josh Duyan</a></li>
                 <li><a href="https://x.com/JonathanFJasper" target="_blank">Jonathan Jasper</a></li>
             </ul>
+            <br></br>
+            <div class="button-container">
+                <a href="https://forms.gle/nKs7b7iHq3qhp6MP7" target="_blank" class="button">Apply</a>
+                <a href="https://dialect.circle.so/home" target="_blank" class="button">Log In</a>
+            </div>
         </div>
     </div>
     <script>
